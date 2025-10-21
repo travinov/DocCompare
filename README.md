@@ -50,7 +50,7 @@
 
 ```bash
 # Клонировать репозиторий
-git clone <repo-url>
+git clone https://github.com/travinov/DocCompare.git
 cd DocCompare
 
 # Настроить переменные окружения
