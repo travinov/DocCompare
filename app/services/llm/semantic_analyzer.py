@@ -321,3 +321,4 @@ class SemanticAnalyzer:
 
         return " ".join(summary_parts)
 
+

@@ -274,3 +274,4 @@ MIT License - см. файл LICENSE
 **Автор:** DocCompare Team  
 **Репозиторий:** https://github.com/travinov/DocCompare
 
+

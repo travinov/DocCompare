@@ -362,3 +362,4 @@ sudo apt-get install tesseract-ocr-rus tesseract-ocr-eng
    - Перейти на S3 вместо MinIO
    - Настроить CDN для статики
 
+

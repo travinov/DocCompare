@@ -67,3 +67,4 @@ dev-setup: install docker-up
 
 all: install docker-up migrate test
 
+

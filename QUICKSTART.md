@@ -331,3 +331,4 @@ brew reinstall tesseract tesseract-lang
 
 Удачи! 🚀
 
+
