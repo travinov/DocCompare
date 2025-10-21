@@ -98,9 +98,19 @@ async def compare_documents(
             process_comparison(case.id, base_doc.id, target_doc.id)
         )
         
-        # Возвращаем начальный статус
-        await db.refresh(case)
-        return case
+        # Возвращаем начальный статус (без relationships чтобы избежать lazy loading)
+        from app.schemas.comparison import CaseResponse
+        return CaseResponse(
+            id=case.id,
+            status=case.status,
+            created_at=case.created_at,
+            updated_at=case.updated_at,
+            total_changes=0,
+            semantic_changes_count=0,
+            technical_changes_count=0,
+            documents=[],
+            changes=[],
+        )
         
     except Exception as e:
         logger.error(f"Error creating comparison: {e}")

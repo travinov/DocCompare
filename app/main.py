@@ -80,7 +80,18 @@ async def health_check():
 @app.exception_handler(Exception)
 async def global_exception_handler(request, exc):
     """Глобальный обработчик исключений."""
+    import traceback
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    # В режиме DEBUG показываем детали ошибки
+    if settings.DEBUG:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "detail": "Internal server error",
+                "error": str(exc),
+                "traceback": traceback.format_exc(),
+            },
+        )
     return JSONResponse(
         status_code=500,
         content={"detail": "Internal server error"},
