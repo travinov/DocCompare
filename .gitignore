@@ -65,6 +65,14 @@ temp/
 
 # Reports
 reports/
+report_*.html
+report_*.md
+POSH_*.html
+POSH_*.md
+*_Report_*.html
+*_Diff_*.md
+detailed_diff_*.md
+downloaded_diff.md
 
 # Alembic
 alembic.ini
