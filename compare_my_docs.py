@@ -133,18 +133,24 @@ def compare_documents(base_file_path: str, target_file_path: str):
                         print(f"      ✅ Стало: {new_text}")
                     print()
             
-            # Сохраняем HTML отчёт
+            # Сохраняем HTML отчёт в папку reports/
+            reports_dir = Path("reports")
+            reports_dir.mkdir(exist_ok=True)
+            
             report_response = requests.get(f"{API_URL}/compare/{case_id}/report/html")
-            report_path = Path(f"report_{case_id}.html")
+            report_path = reports_dir / f"report_{case_id}.html"
             report_path.write_bytes(report_response.content)
             
             print("=" * 60)
-            print(f"📄 HTML отчёт сохранён: {report_path.name}")
+            print(f"📄 HTML отчёт сохранён: {report_path}")
             print("   Открыть отчёт:")
-            print(f"   open {report_path.name}")
+            print(f"   open {report_path}")
             print()
             print(f"🌐 Или откройте в браузере:")
             print(f"   http://localhost:8000/api/v1/compare/{case_id}/report/html")
+            print()
+            print(f"📥 Скачать детальный diff:")
+            print(f"   http://localhost:8000/api/v1/compare/{case_id}/export/detailed-diff")
             print("=" * 60)
             
             break
