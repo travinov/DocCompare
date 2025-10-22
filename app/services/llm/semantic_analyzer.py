@@ -298,6 +298,19 @@ class SemanticAnalyzer:
                 old_len = len(old)
                 new_len = len(new)
                 
+                # Ищем ключевые слова в новом тексте
+                keywords_to_find = ["false complaint", "malicious complaint", "frivolous complaint", "штраф", "увольнение"]
+                keyword_context = ""
+                
+                for keyword in keywords_to_find:
+                    if keyword.lower() in new.lower():
+                        # Нашли ключевое слово - берём контекст вокруг него
+                        idx = new.lower().find(keyword.lower())
+                        start = max(0, idx - 500)
+                        end = min(len(new), idx + 1500)
+                        keyword_context = f"\n\n...[ВАЖНО - найдено упоминание '{keyword}']...\n" + new[start:end] + "\n"
+                        break
+                
                 sample_old = (
                     old[:2000] + "\n\n...[пропущено]...\n\n" +
                     old[old_len//2-1000:old_len//2+1000] + "\n\n...[пропущено]...\n\n" +
@@ -305,7 +318,7 @@ class SemanticAnalyzer:
                 )
                 sample_new = (
                     new[:2000] + "\n\n...[пропущено]...\n\n" +
-                    new[new_len//2-1000:new_len//2+1000] + "\n\n...[пропущено]...\n\n" +
+                    new[new_len//2-1000:new_len//2+1000] + keyword_context + "\n\n...[пропущено]...\n\n" +
                     new[-2000:]
                 )
                 break
