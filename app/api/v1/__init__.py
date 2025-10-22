@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from .endpoints import comparison, detailed_diff
+from .endpoints import comparison, detailed_diff, export
 
 api_router = APIRouter()
 
@@ -16,5 +16,11 @@ api_router.include_router(
 comparison.router.include_router(
     detailed_diff.router,
     tags=["detailed-diff"],
+)
+
+# Добавляем экспорт
+comparison.router.include_router(
+    export.router,
+    tags=["export"],
 )
 
